@@ -4,7 +4,6 @@ import { UserModel } from "../../models";
 
 export const verifyUserController = async (req: Request, res: Response) => {
   const token = req.query.token as string;
-  const type = req.query.type as "signup" | "reset";
 
   const decodedToken = verifyToken(token) as { userId: string };
 

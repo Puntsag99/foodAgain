@@ -19,5 +19,5 @@ export const signinController = async (req: Request, res: Response) => {
   if (!isMatch) {
     res.status(400).send({ message: "Wrong password" });
   }
-  res.status(200).send({ message: "Sign in successful", user });
+  res.status(200).json({ message: "Sign in successful", user });
 };
