@@ -1,7 +1,7 @@
 import express from "express";
+import { configDotenv } from "dotenv";
 import { connectDatabase } from "./database";
 import { authRouter, Catergoryrouther } from "./routers";
-import { configDotenv } from "dotenv";
 
 const app = express();
 

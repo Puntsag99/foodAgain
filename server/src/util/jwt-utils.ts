@@ -1,7 +1,7 @@
 import { sign, verify } from "jsonwebtoken";
 
 export const generateNewToken = (payload: object) => {
-  return sign(payload, process.env.JWT_SECRET!, { expiresIn: "15m" });
+  return sign(payload, process.env.JWT_SECRET!, { expiresIn: "6h" });
 };
 
 export const verifyToken = (token: string) => {

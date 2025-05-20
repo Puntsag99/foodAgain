@@ -1,5 +1,5 @@
 import { UserModel } from "../../models";
-import { decryptHash } from "../../util";
+import { decryptHash, generateNewToken } from "../../util";
 import { Request, Response } from "express";
 
 type UserBody = { email: string; password: string };
@@ -18,6 +18,12 @@ export const signinController = async (req: Request, res: Response) => {
 
   if (!isMatch) {
     res.status(400).send({ message: "Wrong password" });
+    return;
   }
-  res.status(200).json({ message: "Sign in successful", user });
+
+  const accessToken = generateNewToken({ userId: user._id });
+
+  res
+    .status(200)
+    .json({ message: "Sign in successful", token: accessToken, user });
 };

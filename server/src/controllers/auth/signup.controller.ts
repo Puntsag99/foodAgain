@@ -30,12 +30,12 @@ export const signupController = async (req: Request, res: Response) => {
     password: hashedPassword,
   });
 
-  const token = generateNewToken({ userId: user._id });
+  const verifyToken = generateNewToken({ userId: user._id });
 
   await sendUserVerificationLink(
     `${req.protocol}://${req.get(
       "host"
-    )}/auth/verify-user?token=${token}&type=signup`,
+    )}/auth/verify-user?token=${verifyToken}&type=signup`,
     email
   );
 

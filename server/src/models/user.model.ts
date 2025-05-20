@@ -6,14 +6,14 @@ enum UserRoleEnum {
 }
 
 type userSchemaType = {
-  email: string;
-  password: string;
-  phoneNumber: string;
-  address: string;
-  role: UserRoleEnum;
-  orderedFoods: Schema.Types.ObjectId;
   ttl: Date;
+  email: string;
+  address: string;
+  password: string;
+  role: UserRoleEnum;
   isVerified: boolean;
+  phoneNumber: string;
+  orderedFoods: Schema.Types.ObjectId;
 };
 
 const UserSchema = new Schema<userSchemaType>(
