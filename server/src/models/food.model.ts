@@ -7,7 +7,7 @@ type foodSchemaType = {
   updatedAt: Date;
   foodName: string;
   ingredients: string;
-  category: Schema.Types.ObjectId;
+  category: Schema.Types.ObjectId[];
 };
 
 const foodSchema = new Schema<foodSchemaType>(
@@ -17,7 +17,7 @@ const foodSchema = new Schema<foodSchemaType>(
     image: { type: String, required: true, default: "" },
     ingredients: { type: String, required: true, default: "" },
     category: [
-      { type: Schema.Types.ObjectId, ref: "FoodCategory", required: true },
+      { type: Schema.Types.ObjectId, ref: "Category", required: true },
     ],
   },
   { timestamps: true }
