@@ -1,7 +1,12 @@
 import { Router } from "express";
 import { UserRoleEnum } from "../models";
 import { authenticateUser, authorization } from "../middlewares";
-import { createCategory, getCategories, updateCategory } from "../controllers";
+import {
+  createCategory,
+  getCategories,
+  updateCategory,
+  cateGoryDeleted,
+} from "../controllers";
 
 export const Catergoryrouther = Router();
 
@@ -12,4 +17,14 @@ Catergoryrouther.post(
   authorization(UserRoleEnum.ADMIN),
   createCategory
 );
-Catergoryrouther.patch("/food-category/:id", updateCategory);
+Catergoryrouther.patch(
+  "/food-category/:id",
+  authenticateUser,
+  authorization(UserRoleEnum.ADMIN),
+  updateCategory
+).delete(
+  "/food-category/:id",
+  authenticateUser,
+  authorization(UserRoleEnum.ADMIN),
+  cateGoryDeleted
+);

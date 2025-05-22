@@ -5,15 +5,13 @@ type food = {
   image: string;
   price: number;
   foodName: string;
+  category: string[];
   ingredients: string;
 };
 
 export const foodCreate = async (req: Request, res: Response) => {
   try {
-    const { foodName, price, image, ingredients } = req.body as food;
-
-    const foods = await foodModel.find().populate("category");
-    res.status(200).json(foods);
+    const { foodName, price, image, ingredients, category } = req.body as food;
 
     if (!foodName || !price || !image || !ingredients) {
       res.status(400).send({
@@ -26,6 +24,7 @@ export const foodCreate = async (req: Request, res: Response) => {
       image,
       price,
       foodName,
+      category,
       ingredients,
     });
 
@@ -34,8 +33,19 @@ export const foodCreate = async (req: Request, res: Response) => {
       return;
     }
 
-    await foodModel.create({ foodName, price, image, ingredients });
-    res.status(201).json("All fields created succesfully");
+    const newFood = await foodModel.create({
+      price,
+      image,
+      foodName,
+      category,
+      ingredients,
+    });
+
+    const populatedFood = await foodModel
+      .findById(newFood._id)
+      .populate("category");
+
+    res.status(201).json(populatedFood);
     return;
   } catch (error) {
     res.status(500).send({

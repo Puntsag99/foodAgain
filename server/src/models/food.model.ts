@@ -1,4 +1,4 @@
-import { Schema, Model, model, models, Models, ObjectId } from "mongoose";
+import { Schema, Model, model, models, Models } from "mongoose";
 
 type foodSchemaType = {
   price: Number;

@@ -35,13 +35,17 @@ export const authenticateUser = async (
   }
 
   const existinguser = await UserModel.findById(decodedToken.userId);
+  // console.log("existing user", existinguser);
 
   if (!existinguser) {
     res.status(400).send({ message: "user not found" });
     return;
   }
+  // console.log(" req.body", req.body);
 
   req.body.user = existinguser;
+
+  // console.log(" req.body", req.body);
 
   next();
 };
