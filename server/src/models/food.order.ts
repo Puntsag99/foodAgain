@@ -18,16 +18,19 @@ type foodOrderTypeSchema = {
   user: Schema.Types.ObjectId;
 };
 
-const FoodOrderitemSchema = new Schema({
-  food: { type: Schema.Types.ObjectId, ref: "Food" },
-  quantity: { type: Number, required: true },
-});
+const FoodOrderitemSchema = new Schema(
+  {
+    food: { type: Schema.Types.ObjectId, required: true, ref: "food" },
+    quantity: { type: Number, required: true },
+  },
+  { _id: false }
+);
 
 const FoodOrderSchema = new Schema<foodOrderTypeSchema>(
   {
-    user: { type: Schema.Types.ObjectId, ref: "User" },
-    totalPrice: { type: Number },
-    foodOrderItems: [FoodOrderitemSchema],
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    totalPrice: { type: Number, required: true },
+    foodOrderItems: { type: [FoodOrderitemSchema], required: true },
     status: {
       type: String,
       enum: Object.values(FoodOrderStatusEnum),
