@@ -5,6 +5,8 @@ import {
   resPasswordReq,
   verifyUserController,
 } from "../controllers/auth";
+import { UserRoleEnum } from "../models";
+import { authenticateUser, authorization } from "../middlewares";
 
 export const authRouter = Router();
 

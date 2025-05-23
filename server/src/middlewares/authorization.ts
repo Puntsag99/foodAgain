@@ -4,7 +4,7 @@ export const authorization =
   (...roles: string[]) =>
   (req: Request, res: Response, next: NextFunction) => {
     const { user } = req.body;
-    console.log("user", user);
+    // console.log("user", user);
 
     try {
       if (roles.includes(user.role)) {

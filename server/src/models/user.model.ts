@@ -22,9 +22,7 @@ const UserSchema = new Schema<userSchemaType>(
     password: { type: String, required: true },
     address: { type: String, default: "" },
     isVerified: { type: Boolean, default: false },
-    orderedFoods: [
-      { type: Schema.Types.ObjectId, ref: "FoodOrder", required: true },
-    ],
+    orderedFoods: [{ type: Schema.Types.ObjectId, ref: "FoodOrder " }],
     phoneNumber: { type: String, default: "" },
     role: {
       type: String,
