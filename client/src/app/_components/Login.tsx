@@ -5,6 +5,7 @@ import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
 export const Login = () => {
   const validationSchema = Yup.object({
@@ -29,8 +30,19 @@ export const Login = () => {
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
-            alert("successfully");
+          onSubmit={async (values, { setSubmitting }) => {
+            try {
+              const res = await axios.post(
+                "http://localhost:8000/api/auth/signin",
+                values
+              );
+              localStorage.setItem("token", res.data.token);
+              alert("Successfully logged in!");
+            } catch (error: any) {
+              alert(error.response?.data?.message || "Something went wrong");
+            } finally {
+              setSubmitting(false);
+            }
           }}
         >
           {({ errors, touched }) => (

@@ -40,4 +40,7 @@ export const signupController = async (req: Request, res: Response) => {
   );
 
   res.status(201).send({ message: "Success" });
+  // console.log("Signup received:", email, password);
+  // console.log("Hashed password:", hashedPassword);
+  // console.log("User saved:", user);
 };

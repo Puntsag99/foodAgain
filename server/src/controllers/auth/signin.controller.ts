@@ -14,6 +14,11 @@ export const signinController = async (req: Request, res: Response) => {
     return;
   }
 
+  if (!user.isVerified) {
+    res.status(403).send({ message: "Please verify your email first" });
+    return;
+  }
+
   const isMatch = decryptHash(password, user.password);
 
   if (!isMatch) {
