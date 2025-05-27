@@ -15,4 +15,4 @@ authRouter.post("/sign-up", signupController);
 authRouter.post("/sign-in", signinController);
 authRouter.get("/verify-user", verifyUserController);
 // authRouter.get("/refresh-user", refreshUserController);
-authRouter.post("/reset-password-request", authenticateUser, resPasswordReq);
+authRouter.post("/reset-password-request", resPasswordReq);

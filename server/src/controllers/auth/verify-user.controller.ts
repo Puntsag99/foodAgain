@@ -4,7 +4,7 @@ import { UserModel } from "../../models";
 
 export const verifyUserController = async (req: Request, res: Response) => {
   const token = req.query.token as string;
-
+  const type = req.query.type as string;
   const decodedToken = verifyToken(token) as { userId: string };
 
   await UserModel.findByIdAndUpdate(decodedToken.userId, {
@@ -12,5 +12,9 @@ export const verifyUserController = async (req: Request, res: Response) => {
     ttl: Date.now() + 10 * 365 * 24 * 60 * 60 * 1000,
   });
 
-  res.redirect(`${process.env.FRONTEND_ENDPOINT}/login`);
+  if (type === "reset") {
+    res.redirect(`${process.env.FRONTEND_ENDPOINT}/password`);
+  } else {
+    res.redirect(`${process.env.FRONTEND_ENDPOINT}/login`);
+  }
 };

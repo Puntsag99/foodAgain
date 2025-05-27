@@ -30,16 +30,16 @@ export const UserContextProvider = ({ children }: PropsWithChildren) => {
     await axios.post("local/login");
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
 
-    if (token) {
-      const refreshToken = axios("da", {
-        headers: { Authorization: token },
-      });
-      // localStorage.setItem("token ", refreshToken);
-    }
-  }, []);
+  //   if (token) {
+  //     const refreshToken = axios("da", {
+  //       headers: { Authorization: token },
+  //     });
+  //     // localStorage.setItem("token ", refreshToken);
+  //   }
+  // }, []);
 
   return (
     <UserContext.Provider

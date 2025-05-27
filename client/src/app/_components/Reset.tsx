@@ -8,39 +8,37 @@ import { useRouter } from "next/navigation";
 import { Field, Form, Formik } from "formik";
 import { Button } from "@/components/ui/button";
 
-export const Login = () => {
+export const ResetPassword = () => {
   const router = useRouter();
-
   const validationSchema = Yup.object({
     email: Yup.string().email("Email is wrong").required("Email is none"),
-    password: Yup.string()
-      .min(6, "password must be 6 characters long")
-      .required("password is none"),
   });
 
   return (
     <div className="flex gap-x-12 h-full items-center px-[100px]">
       <div className=" flex flex-1 flex-col gap-y-6 max-w-[416px]">
-        <div className="cursor-pointer w-9 h-9 border rounded-md flex justify-center items-center border-[#e4e4e7]">
-          <ChevronLeft className="cursor-pointer w-4 h-8 text-[#18181B]" />
+        <div className="cursor-pointer hover:bg-black  w-9 h-9 border rounded-md flex justify-center items-center border-[#e4e4e7]">
+          <ChevronLeft className="w-4 h-8 text-[#18181B] hover:text-white" />
         </div>
         <div className="flex gap-y-[4px] flex-col">
-          <h3 className="font-semibold text-2xl ">Log in</h3>
+          <h3 className="font-semibold text-2xl ">Reset your password </h3>
           <p className="text-[#71717A] text-base font-normal">
-            Log in to enjoy your favorite dishes.
+            Enter your email to receive a password reset link.{" "}
           </p>
         </div>
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ email: "" }}
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting }) => {
             try {
               const res = await axios.post(
-                "http://localhost:8000/auth/sign-in",
+                "http://localhost:8000/auth/reset-password-request",
                 values
               );
+
               localStorage.setItem("token", res.data.token);
-              alert("Successfully logged in!");
+              localStorage.setItem("email", values.email);
+              alert("Verification email sent.");
             } catch (error: any) {
               alert(error.response?.data?.message || "Something went wrong");
             } finally {
@@ -61,32 +59,14 @@ export const Login = () => {
                   <div className="text-red-500 text-sm">{errors.email}</div>
                 )}
               </div>
-              <div>
-                <Field
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  className="w-full border rounded-md h-9 px-3"
-                />
-                {errors.password && touched.password && (
-                  <div className="text-red-500 text-sm">{errors.password}</div>
-                )}
-              </div>
-
-              <a
-                href="#"
-                className="font-normal text-sm underline"
-                onClick={() => router.push("/passwordRequest")}
-              >
-                Forgot password?
-              </a>
 
               <Button
                 variant="outline"
-                className="hover:text-[#FAFAFA] hover:bg-[#18181B]"
+                className="hover:text-[#FAFAFA] hover:bg-[#18181B] cursor-pointer"
                 type="submit"
+                onClick={() => router.push("/verify")}
               >
-                Lets go
+                Send link
               </Button>
             </Form>
           )}
