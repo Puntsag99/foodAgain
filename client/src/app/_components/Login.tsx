@@ -86,7 +86,7 @@ export const Login = () => {
                 className="hover:text-[#FAFAFA] hover:bg-[#18181B]"
                 type="submit"
               >
-                Lets go
+                Lets g
               </Button>
             </Form>
           )}
