@@ -1,5 +1,11 @@
+import { NewPassword } from "@/app/_components/NewPassword";
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div className="h-screen w-screen">
+      <NewPassword />
+    </div>
+  );
 };
 
 export default Home;

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  ResetPassword,
   signupController,
   signinController,
   resPasswordReq,
@@ -13,6 +14,7 @@ export const authRouter = Router();
 
 authRouter.post("/sign-up", signupController);
 authRouter.post("/sign-in", signinController);
+authRouter.post("/reset-password", ResetPassword);
 authRouter.get("/verify-user", verifyUserController);
 // authRouter.get("/refresh-user", refreshUserController);
 authRouter.post("/reset-password-request", resPasswordReq);

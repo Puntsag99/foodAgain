@@ -25,14 +25,14 @@ export const sendUserVerificationLink = async (
     type === "reset"
       ? `
     <div> 
-      <h1> Password Reset Request </h1>
+      <h1>Password Reset Request</h1>
       <p>You requested to reset your password. This link is valid for 1 hour.</p>
       <a href="${baseURL}">Reset Password</a>
     </div>
   `
       : `
     <div> 
-      <h1> User Verification Link </h1>
+      <h1>User Verification Link</h1>
       <p>This verification link is valid for 1 hour.</p>
       <a href="${baseURL}">Verify Email</a>
     </div>
