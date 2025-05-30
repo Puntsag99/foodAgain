@@ -10,10 +10,10 @@ import {
 
 export const Catergoryrouther = Router();
 
-Catergoryrouther.get("/food-category", getCategories);
+Catergoryrouther.get("/", getCategories);
 
 Catergoryrouther.post(
-  "/food-category",
+  "/",
   authenticateUser,
   authorization(UserRoleEnum.ADMIN),
   createCategory

@@ -39,8 +39,17 @@ export const Login = () => {
                 "http://localhost:8000/auth/sign-in",
                 values
               );
-              localStorage.setItem("token", res.data.token);
-              alert("Successfully logged in!");
+              const { token, user } = res.data;
+              localStorage.setItem("token", token);
+              localStorage.setItem("role", user.role);
+
+              // alert("Successfully logged in!");
+
+              if (user.role === "Admin") {
+                router.push("/orders");
+              } else {
+                router.push("/");
+              }
             } catch (error: any) {
               alert(error.response?.data?.message || "Something went wrong");
             } finally {
@@ -86,7 +95,7 @@ export const Login = () => {
                 className="hover:text-[#FAFAFA] hover:bg-[#18181B]"
                 type="submit"
               >
-                Lets g
+                Lets go
               </Button>
             </Form>
           )}
